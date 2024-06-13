@@ -2,7 +2,7 @@ import type { CreateItemAttrs } from '$services/types';
 import { client } from '$services/redis';
 import { serialize } from './serialize';
 import { genId } from '$services/utils';
-import { itemsKey } from '$services/keys';
+import { itemByEndingTimeKey, itemByPriceKey, itemByViewKey, itemViewskey, itemsKey } from '$services/keys';
 import { deserialize } from './deserialize';
 
 export const getItem = async (id: string) => {
@@ -16,7 +16,7 @@ export const getItem = async (id: string) => {
 };
 
 export const getItems = async (ids: string[]) => {
-	const commands = ids.map((id) => {
+	const commands = ids && ids.map((id) => {
 		return client.hGetAll(itemsKey(id));
 	});
 
@@ -36,7 +36,22 @@ export const createItem = async (attrs: CreateItemAttrs) => {
 
 	const serialized = serialize(attrs);
 
-	await client.hSet(itemsKey(id), serialized);
-
-	return id;
+	const commands = [
+		client.hSet(itemsKey(id), serialized),
+	    client.zAdd(itemByViewKey(), {
+		value: id,
+		score: 0
+	}),
+	client.zAdd(itemByEndingTimeKey(), {
+			value: id,
+			score: attrs.endingAt.toMillis()
+	}),
+	client.zAdd(itemByPriceKey(), {
+		value: id,
+		score: 0,
+	})
+	]
+	
+   await Promise.all(commands)
+return id;
 };

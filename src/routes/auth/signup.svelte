@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { post, f } from '$lib/fetch';
 	import { session } from '$app/stores';
+  import Error from '$lib/components/error.svelte';
 
 	let username = '';
 	let password = '';
@@ -21,7 +22,7 @@
 		goto('/dashboard/items');
 	}
 </script>
-
+<Error err={err} />
 <div
 	class="flex flex-col mx-auto items-center max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
 >
@@ -59,12 +60,6 @@
 					/>
 				</div>
 			</div>
-
-			{#if err}
-				<div class="my-4 text-red-600">
-					{err}
-				</div>
-			{/if}
 
 			<div class="flex w-full my-4">
 				<button

@@ -24,14 +24,14 @@
 
 <svelte:window on:click={() => (focused = false)} />
 <div
-	class="relative h-10 w-96 ml-4 border border-gray-300 text-sm rounded-full flex"
+	class="relative h-10 w-96 ml-4 border border-gray-300 text-sm flex"
 	on:click|stopPropagation={() => (focused = true)}
 >
 	<input
 		type="search"
 		name="search"
 		placeholder="Search"
-		class="px-4 w-full rounded-full text-sm focus:outline-none"
+		class="px-4 w-full text-sm focus:outline-none"
 		bind:value={term}
 	/>
 

@@ -4,13 +4,16 @@ import { client } from '$services/redis';
 import { usersKey, usernamesUniqueKey, usernamesKey } from '$services/keys';
 
 export const getUserByUsername = async (username: string) => {
-	const userIdInt = await client.zScore(usernamesKey(), username)
-	// const userId = parseInt(userIdInt,16)
+	const decimalId = await client.zScore(usernamesKey(), username);
+	if (!decimalId) {
+		throw new Error("Invalid credentials");	
+	}
+	const id = decimalId.toString(16)
+	return await getUserById(id)
 };
 
 export const getUserById = async (id: string) => {
 	const user = await client.hGetAll(usersKey(id));
-
 	return deserialize(id, user);
 };
 

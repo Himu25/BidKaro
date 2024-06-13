@@ -4,7 +4,7 @@ import { createUser, getUserByUsername } from '$services/queries/users';
 export const signup = async (username: string, password: string) => {
 	const [hashed, salt] = await saltAndHash(password);
 
-	return createUser({
+	return await createUser({
 		username,
 		password: `${hashed}.${salt}`
 	});
