@@ -10,4 +10,6 @@ export const itemByEndingTimeKey = () => "items:endingTime"
 export const itemViewskey = (itemId: string) => `items:views#${itemId}`
 export const itemByPriceKey = ()=> "items:price"
 
-export const bidHistoryKey = (itemId: string)=> `bid:history#${itemId}`
+export const bidHistoryKey = (itemId: string) => `bid:history#${itemId}`
+
+export const itemIndexKey = ()=> 'idx:items'

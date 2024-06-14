@@ -33,6 +33,7 @@
 				"pm2": "^5.2.0",
 				"redis": "^4.0.3",
 				"redis-cli": "^2.1.2",
+				"redlock": "^5.0.0-beta.2",
 				"ts-node": "^10.5.0",
 				"ts-node-dev": "^1.1.8"
 			},
@@ -3085,6 +3086,11 @@
 				"node": ">= 0.4.0"
 			}
 		},
+		"node_modules/node-abort-controller": {
+			"version": "3.1.1",
+			"resolved": "https://registry.npmjs.org/node-abort-controller/-/node-abort-controller-3.1.1.tgz",
+			"integrity": "sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ=="
+		},
 		"node_modules/node-releases": {
 			"version": "2.0.2",
 			"resolved": "https://registry.npmjs.org/node-releases/-/node-releases-2.0.2.tgz",
@@ -3944,6 +3950,17 @@
 			"dependencies": {
 				"chai": "^3.5.0",
 				"mocha": "^5.2.0"
+			}
+		},
+		"node_modules/redlock": {
+			"version": "5.0.0-beta.2",
+			"resolved": "https://registry.npmjs.org/redlock/-/redlock-5.0.0-beta.2.tgz",
+			"integrity": "sha512-2RDWXg5jgRptDrB1w9O/JgSZC0j7y4SlaXnor93H/UJm/QyDiFgBKNtrh0TI6oCXqYSaSoXxFh6Sd3VtYfhRXw==",
+			"dependencies": {
+				"node-abort-controller": "^3.0.1"
+			},
+			"engines": {
+				"node": ">=12"
 			}
 		},
 		"node_modules/registry-auth-token": {
@@ -7954,6 +7971,11 @@
 			"resolved": "https://registry.npmjs.org/netmask/-/netmask-2.0.2.tgz",
 			"integrity": "sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg=="
 		},
+		"node-abort-controller": {
+			"version": "3.1.1",
+			"resolved": "https://registry.npmjs.org/node-abort-controller/-/node-abort-controller-3.1.1.tgz",
+			"integrity": "sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ=="
+		},
 		"node-releases": {
 			"version": "2.0.2",
 			"resolved": "https://registry.npmjs.org/node-releases/-/node-releases-2.0.2.tgz",
@@ -8584,6 +8606,14 @@
 			"requires": {
 				"chai": "^3.5.0",
 				"mocha": "^5.2.0"
+			}
+		},
+		"redlock": {
+			"version": "5.0.0-beta.2",
+			"resolved": "https://registry.npmjs.org/redlock/-/redlock-5.0.0-beta.2.tgz",
+			"integrity": "sha512-2RDWXg5jgRptDrB1w9O/JgSZC0j7y4SlaXnor93H/UJm/QyDiFgBKNtrh0TI6oCXqYSaSoXxFh6Sd3VtYfhRXw==",
+			"requires": {
+				"node-abort-controller": "^3.0.1"
 			}
 		},
 		"registry-auth-token": {

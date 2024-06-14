@@ -48,7 +48,7 @@
 					{#each results as item}
 						<a href={`/items/${item.id}`}>
 							<div class="p-4 bg-white hover:bg-gray-50">
-								{item.name}
+								{`${item.name}`}
 							</div>
 						</a>
 					{/each}

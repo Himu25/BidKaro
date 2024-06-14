@@ -1,5 +1,6 @@
 import { itemByViewKey, itemViewskey, itemsKey } from '$services/keys';
 import { createClient,defineScript } from 'redis';
+import { createIndexes } from './create-indexes';
 
 const client = createClient({
 	socket: {
@@ -33,11 +34,34 @@ const client = createClient({
 			},
 			transformReply() {	}
         // Evalsha ID 3 [this above array elements one by one]
-		})
+		}),
+		unlock: defineScript({
+			NUMBER_OF_KEYS: 1,
+			transformArguments(key: string, token: string) {
+				return [key, token];
+			},
+			transformReply(reply: any) {
+				return reply;
+			},
+			SCRIPT: `
+				if redis.call('GET', KEYS[1]) == ARGV[1] then
+					return redis.call('DEL', KEYS[1])
+				end
+			`
+		}),
 	}
 });
 
+
 client.on('error', (err) => console.error(err));
 client.connect();
+
+client.on('connect',async() => {
+	try {
+		await createIndexes()
+	} catch (error) {
+		console.error(error)		
+	}
+})
 
 export { client };
