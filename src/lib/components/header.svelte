@@ -1,65 +1,74 @@
 <script>
-	import { post } from '$lib/fetch';
-	import { goto } from '$app/navigation';
-	import { session } from '$app/stores';
-	import { f } from '$lib/fetch';
-	import Button from '$lib/components/button.svelte';
-	import Search from '$lib/components/search.svelte';
+  import { post } from "$lib/fetch";
+  import { goto } from "$app/navigation";
+  import { session } from "$app/stores";
+  import { f } from "$lib/fetch";
+  import Search from "$lib/components/search.svelte";
 
-	async function onClick() {
-		await post('/auth/signout');
-		const [data] = await f('/sessions');
-		session.set(data);
-		goto('/');
-	}
-  let showDropdown = false;
-
-  function toggleDropdown() {
-    showDropdown = !showDropdown;
-  }
-
-  function closeDropdown() {
-    showDropdown = false;
+  async function onClick() {
+    await post("/auth/signout");
+    const [data] = await f("/sessions");
+    session.set(data);
+    goto("/");
   }
 </script>
 
-<nav class="w-full p-2 shadow-xs bg-[rgb(79,70,229)] mb-8">
-  <div class="container mx-auto flex flex-row items-center justify-between">
-    <a href="/">
-      <div class="text-xl text-white mr-14 font-bold flex">BidKaro</div>
-    </a>
-    <Search />
-    <div class="flex ml-auto self-end md:flex gap-4">
-      {#if $session && $session.userId}
-        <a href="/dashboard/items/new"><Button>New</Button></a>
-        <a href="/dashboard/items"><Button>Dashboard</Button></a>
-      {:else}
-        <a href="/auth/signin"><Button>Sign In</Button></a>
-        <a href="/auth/signup"><Button>Sign Up</Button></a>
-      {/if}
-    </div>
-	{#if $session && $session.userId}
-    <div class="relative ml-3">
-      <div>
-        <button on:click={toggleDropdown} type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded={showDropdown} aria-haspopup="true">
-          <span class="absolute -inset-1.5"></span>
-          <span class="sr-only">Open user menu</span>
-          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-        </button>
+<nav
+  class="bg-[rgb(79,70,229)] shadow-lg fixed top-0 left-0 right-0 z-50 w-full"
+>
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+    <div class="flex items-center justify-between h-16">
+      <!-- Search Component - Left-aligned -->
+      <div class="flex items-center w-full max-w-xl">
+        <Search />
       </div>
-
-      {#if showDropdown}
-        <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-          <a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-700 hover:text-white" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-          <a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-700 hover:text-white" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-          <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-700 hover:text-white" role="menuitem" tabindex="-1" id="user-menu-item-2" on:click={onClick}>Logout</button>
-        </div>
-      {/if}
+      <!-- Logo and Navigation Links - Right-aligned -->
+      <div class="flex items-center space-x-8 ml-auto">
+        <a
+          href="/"
+          class="text-white text-lg font-medium hover:underline hover:text-gray-100 transition-colors"
+        >
+          Home
+        </a>
+        {#if $session && $session.userId}
+          <a
+            href="/dashboard/items"
+            class="text-white text-lg font-medium hover:underline hover:text-gray-100 transition-colors"
+          >
+            Dashboard
+          </a>
+          <a
+            href="/dashboard/items/new"
+            class="text-white text-lg font-medium hover:underline hover:text-gray-100 transition-colors"
+          >
+            Create
+          </a>
+          <button
+            class="bg-white text-[rgb(79,70,229)] font-medium py-2 px-5 rounded-lg shadow-md hover:bg-[rgb(79,70,229)] hover:text-white hover:shadow-lg border border-[rgb(79,70,229)] transition-all duration-300"
+            on:click={onClick}
+          >
+            Logout
+          </button>
+        {:else}
+          <a
+            href="/auth/signin"
+            class="text-white text-lg font-medium hover:underline hover:text-gray-100 transition-colors"
+          >
+            Sign In
+          </a>
+          <a
+            href="/auth/signup"
+            class="text-white text-lg font-medium hover:underline hover:text-gray-100 transition-colors"
+          >
+            Sign Up
+          </a>
+        {/if}
+      </div>
     </div>
-	{/if}
   </div>
-
-
 </nav>
 
-<div on:click={closeDropdown} class:showDropdown={showDropdown}></div>
+<!-- Content with Margin for Navbar -->
+<div class="mt-20">
+  <!-- Page Content Goes Here -->
+</div>

@@ -1,5 +1,16 @@
 <script>
-	import Icon from '$lib/components/icon.svelte';
+  import Icon from '$lib/components/icon.svelte';
+  import { post } from '$lib/fetch';
+	let email = '';
+	let err = null;
+
+	async function handleSubscribe() {
+		const [_data, err] = await post('/subscribe', { email });
+
+		if (err) {
+			return;
+		}
+	}
 </script>
 
 <footer class="bg-white mt-20 dark:bg-gray-800 pb-8 xl:pt-8">
@@ -166,11 +177,14 @@
 		</div>
 		<div class="text-center pt-10 sm:pt-12 font-light flex items-center justify-center">
 			<form
+			on:submit|preventDefault={handleSubscribe}
 				class="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center"
 			>
 				<div class=" relative ">
 					<input
-						type="text"
+					    bind:value={email}
+						type="email"
+					    name="email"
 						id="&quot;form-subscribe-Subscribe"
 						class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
 						placeholder="Email"

@@ -1,74 +1,189 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { post, f } from '$lib/fetch';
-	import { session } from '$app/stores';
-     import Error from '$lib/components/error.svelte';
+  import { goto } from "$app/navigation";
+  import { post, f } from "$lib/fetch";
+  import { session } from "$app/stores";
+  import Error from "$lib/components/error.svelte";
 
-	let username = '';
-	let password = '';
-	let err = null;
+  let username = "";
+  let password = "";
+  let err = null;
+  let isLoading = false;
 
-	async function onSubmit() {
-		let _data: any;
-		[_data, err] = await post('/auth/signin', { username, password });
+  async function onSubmit() {
+    isLoading = true; // Start loading
+    let _data: any;
 
-		if (err) {
-			return;
-		}
+    [_data, err] = await post("/auth/signin", { username, password });
 
-		const [data] = await f('/sessions');
-		session.set(data);
+    if (err) {
+      isLoading = false; // Stop loading on error
+      return;
+    }
 
-		goto('/dashboard/items');
-	}
+    const [data] = await f("/sessions");
+    session.set(data);
+
+    isLoading = false; // Stop loading after success
+    goto("/dashboard/items");
+  }
 </script>
-<Error err={err} />
-<div
-	class="flex flex-col mx-auto items-center max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
->
-	<div class="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
-		Sign In
-	</div>
-	<span
-		class="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400"
-	>
-		Don't have an account ?
-		<a href="/auth/signup" class="text-sm text-blue-500 underline hover:text-blue-700"> Sign up </a>
-	</span>
-	<div class="p-6 mt-8">
-		<form on:submit|preventDefault={onSubmit}>
-			
-			<div class="flex flex-col mb-2">
-				<div class="relative">
-					<input
-						bind:value={username}
-						type="text"
-						id="create-account-pseudo"
-						class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-						name="username"
-						placeholder="User Name"
-					/>
-				</div>
-			</div>
-			<div class="flex flex-col mb-2">
-				<div class=" relative ">
-					<input
-						bind:value={password}
-						type="password"
-						id="password"
-						class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-						placeholder="Password"
-					/>
-				</div>
-			</div>
-			<div class="flex w-full my-4">
-				<button
-					type="submit"
-					class="py-2 px-4 bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-				>
-					Sign In
-				</button>
-			</div>
-		</form>
-	</div>
+
+<Error {err} />
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title">Welcome Back!</h2>
+    <p class="login-subtitle">
+      Don't have an account?
+      <a href="/auth/signup" class="signup-link">Sign up here</a>
+    </p>
+    <form on:submit|preventDefault={onSubmit} class="login-form">
+      <div class="input-group">
+        <input
+          bind:value={username}
+          type="text"
+          class="input-field"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          bind:value={password}
+          type="password"
+          class="input-field"
+          placeholder="Enter your password"
+        />
+      </div>
+      <div class="action-group">
+        <button type="submit" class="submit-button" disabled={isLoading}>
+          {#if isLoading}
+            <span class="loader" /> Signing In...
+          {:else}
+            Sign In
+          {/if}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<style>
+  /* Positioning the form */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .login-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .signup-link {
+    color: #6366f1;
+    font-weight: 500;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  .signup-link:hover {
+    color: #4338ca;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input-group {
+    position: relative;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #f9fafb;
+    color: #374151;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .input-field:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    outline: none;
+  }
+
+  .action-group {
+    margin-top: 1rem;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #6366f1, #4338ca);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+  }
+
+  .submit-button:disabled {
+    background: #a5b4fc;
+    cursor: not-allowed;
+  }
+
+  .submit-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #4338ca, #6366f1);
+  }
+
+  .loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
