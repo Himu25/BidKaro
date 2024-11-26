@@ -1,8 +1,8 @@
-import { c as create_ssr_component, a as add_attribute, e as escape, d as subscribe, v as validate_component, o as each } from "../../../chunks/index-e8e3b014.js";
+import { c as create_ssr_component, a as add_attribute, e as escape, b as subscribe, v as validate_component, k as each } from "../../../chunks/index-47aa9221.js";
 import { DateTime } from "luxon";
-import { p as page, s as session } from "../../../chunks/stores-b8f73eaf.js";
+import { p as page, s as session } from "../../../chunks/stores-fb210881.js";
 import { Chart } from "chart.js";
-import { C as Card } from "../../../chunks/card-b8f16571.js";
+import { C as Card } from "../../../chunks/card-13eb90d7.js";
 const Chart_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let context;
   let { bidHistory = [] } = $$props;
@@ -77,10 +77,10 @@ const Stat = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.value(value);
   if ($$props.bg === void 0 && $$bindings.bg && bg !== void 0)
     $$bindings.bg(bg);
-  return `<div${add_attribute("class", `${bg} shadow-lg rounded-2xl w-36 p-4 dark:bg-gray-800`, 0)}><div class="${"flex items-center"}">
-		<p class="${"text-md text-white dark:text-white-50 ml-2"}">${escape(label)}</p></div>
-	<div class="${"flex flex-col justify-start"}"><p class="${"text-white text-2xl text-left dark:text-white font-bold my-4"}">${escape(value)}</p>
-		</div></div>`;
+  return `<div${add_attribute("class", `${bg} shadow-lg rounded-2xl w-36 p-4 `, 0)}><div class="${"flex items-center"}">
+    <p class="${"text-md text-white dark:text-white-50 ml-2"}">${escape(label)}</p></div>
+  <div class="${"flex flex-col justify-start"}"><p class="${"text-white text-2xl text-left dark:text-white font-bold my-4"}">${escape(value)}</p>
+    </div></div>`;
 });
 const U5Bidu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let endingAt;
@@ -110,47 +110,47 @@ const U5Bidu5D = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   $$unsubscribe_page();
   $$unsubscribe_session();
   return `${item ? `<div><div class="${"flex justify-end mb-2"}"></div>
-		<div class="${"flex gap-10"}"><img alt="${""}" class="${"w-1/3 p-3 border rounded"}"${add_attribute("src", item.imageUrl, 0)}>
-			<div class="${"flex-1 flex flex-col gap-4"}"><div class="${"flex items-center justify-between"}"><div class="${"text-3xl"}">${escape(item.name)}</div>
-					${validate_component(Like_button, "LikeButton").$$render($$result, { numLikes: item.likes, userLikes }, {}, {})}</div>
-				<a${add_attribute("href", `/users/${item.ownerId}`, 0)} class="${"inline-block self-start text-indigo-600 hover:text-indigo-900"}">See the seller</a>
-				<p>${escape(item.description)}</p>
+    <div class="${"flex gap-10"}"><img alt="${""}" class="${"w-1/3 p-3 border rounded"}"${add_attribute("src", item.imageUrl, 0)}>
+      <div class="${"flex-1 flex flex-col gap-4"}"><div class="${"flex items-center justify-between"}"><div class="${"text-3xl"}">${escape(item.name)}</div>
+          ${validate_component(Like_button, "LikeButton").$$render($$result, { numLikes: item.likes, userLikes }, {}, {})}</div>
+        <a${add_attribute("href", `/users/${item.ownerId}`, 0)} class="${"inline-block self-start text-indigo-600 hover:text-indigo-900"}">See the seller</a>
+        <p>${escape(item.description)}</p>
 
-				<hr>
+        <hr>
 
-				<div class="${"flex justify-between"}">${validate_component(Stat, "Stat").$$render($$result, {
+        <div class="${"flex justify-between"}">${validate_component(Stat, "Stat").$$render($$result, {
     label: "High Bid",
     value: "$" + item.price.toFixed(2)
   }, {}, {})}
-					${validate_component(Stat, "Stat").$$render($$result, {
+          ${validate_component(Stat, "Stat").$$render($$result, {
     bg: "bg-amber-500",
     label: "# Bids",
     value: item.bids
   }, {}, {})}
-					${validate_component(Stat, "Stat").$$render($$result, {
+          ${validate_component(Stat, "Stat").$$render($$result, {
     bg: "bg-violet-500",
     label: "Ending In",
     value: endingAt
   }, {}, {})}</div>
 
-				${userHasHighBid ? `<div class="${"text-lg text-green-600 font-bold"}">You have the highest bid!</div>` : ``}
+        ${userHasHighBid ? `<div class="${"text-lg text-green-600 font-bold"}">You have the highest bid!
+          </div>` : ``}
 
-				<div class="${"border p-4 rounded w-full"}"><form class="${"flex flex-col gap-3"}"><div class="${"text-lg"}">Place a Bid</div>
+        <div class="${"border p-4 rounded w-full"}"><form class="${"flex flex-col gap-3"}"><div class="${"text-lg"}">Place a Bid</div>
 
-						<input id="${"amount"}" class="${"rounded-lgborder-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"}"${add_attribute("placeholder", `$${(item.price + 0.01).toFixed(2)} minimum`, 0)}${add_attribute("value", amount, 0)}>
+            <input id="${"amount"}" class="${"rounded-lgborder-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"}"${add_attribute("placeholder", `$${(item.price + 0.01).toFixed(2)} minimum`, 0)}${add_attribute("value", amount, 0)}>
 
-						${err ? `<div class="${"text-red-500 font-bold"}">${escape(err)}</div>` : ``}
+            ${err ? `<div class="${"text-red-500 font-bold"}">${escape(err)}</div>` : ``}
 
-						${``}
+            ${``}
 
-						<button class="${[
-    "py-2 px-4 bg-indigo-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ",
+            <button class="${[
+    "py-2 px-4 bg-indigo-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg",
     " "
-  ].join(" ").trim()}">Place Bid
-						</button></form></div></div></div></div>
+  ].join(" ").trim()}">${`Place Bid`}</button></form></div></div></div></div>
 
-	<div class="${"my-8"}"><div class="${"text-xl"}">Bid History</div>
-		<div class="${"my-2 mx-3"}">${validate_component(Chart_1, "Chart").$$render($$result, { bidHistory: history }, {}, {})}</div></div>` : ``}
+  <div class="${"my-8"}"><div class="${"text-xl"}">Bid History</div>
+    <div class="${"my-2 mx-3"}">${validate_component(Chart_1, "Chart").$$render($$result, { bidHistory: history }, {}, {})}</div></div>` : ``}
 
 <div class="${"text-xl"}">Similar Items</div>
 <div class="${"flex flex-wrap gap-4 justify-center"}">${each(similarItems, (item2) => {

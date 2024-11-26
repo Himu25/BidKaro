@@ -1,7 +1,13 @@
 const post = async ({ request, locals }) => {
-  locals.session = null;
-  return {
-    status: 200
-  };
+  try {
+    locals.session = null;
+    return {
+      status: 200
+    };
+  } catch (error) {
+    return {
+      status: 500
+    };
+  }
 };
 export { post };

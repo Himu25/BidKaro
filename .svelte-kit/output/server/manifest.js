@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set(["favicon.png"]),
 	_: {
 		mime: {".png":"image/png"},
-		entry: {"file":"start-f063010d.js","js":["start-f063010d.js","chunks/vendor-041ace6d.js","chunks/singletons-a6a7384f.js"],"css":[]},
+		entry: {"file":"start-f1bee290.js","js":["start-f1bee290.js","chunks/vendor-c278652d.js","chunks/singletons-a6a7384f.js"],"css":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -14,9 +14,7 @@ export const manifest = {
 			() => import('./nodes/6.js'),
 			() => import('./nodes/7.js'),
 			() => import('./nodes/8.js'),
-			() => import('./nodes/9.js'),
-			() => import('./nodes/10.js'),
-			() => import('./nodes/11.js')
+			() => import('./nodes/9.js')
 		],
 		routes: [
 			{
@@ -48,33 +46,9 @@ export const manifest = {
 			},
 			{
 				type: 'endpoint',
-				pattern: /^\/subscribe\/?$/,
-				params: null,
-				load: () => import('./entries/endpoints/subscribe.ts.js')
-			},
-			{
-				type: 'endpoint',
 				pattern: /^\/sessions\/?$/,
 				params: null,
 				load: () => import('./entries/endpoints/sessions/index.ts.js')
-			},
-			{
-				type: 'page',
-				pattern: /^\/privacy\/?$/,
-				params: null,
-				path: "/privacy",
-				shadow: null,
-				a: [0,5],
-				b: [1]
-			},
-			{
-				type: 'page',
-				pattern: /^\/about\/?$/,
-				params: null,
-				path: "/about",
-				shadow: null,
-				a: [0,6],
-				b: [1]
 			},
 			{
 				type: 'page',
@@ -82,7 +56,7 @@ export const manifest = {
 				params: null,
 				path: "/items",
 				shadow: () => import('./entries/endpoints/items/index.ts.js'),
-				a: [0,7],
+				a: [0,5],
 				b: [1]
 			},
 			{
@@ -109,7 +83,7 @@ export const manifest = {
 				params: (m) => ({ id: m[1]}),
 				path: null,
 				shadow: () => import('./entries/endpoints/items/_id_.ts.js'),
-				a: [0,8],
+				a: [0,6],
 				b: [1]
 			},
 			{
@@ -118,7 +92,7 @@ export const manifest = {
 				params: (m) => ({ id: m[1]}),
 				path: null,
 				shadow: () => import('./entries/endpoints/users/_id_.ts.js'),
-				a: [0,9],
+				a: [0,7],
 				b: [1]
 			},
 			{
@@ -133,7 +107,7 @@ export const manifest = {
 				params: null,
 				path: "/auth/signin",
 				shadow: () => import('./entries/endpoints/auth/signin.ts.js'),
-				a: [0,10],
+				a: [0,8],
 				b: [1]
 			},
 			{
@@ -142,7 +116,7 @@ export const manifest = {
 				params: null,
 				path: "/auth/signup",
 				shadow: () => import('./entries/endpoints/auth/signup.ts.js'),
-				a: [0,11],
+				a: [0,9],
 				b: [1]
 			}
 		]

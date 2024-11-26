@@ -10,21 +10,25 @@
   let isLoading = false;
 
   async function onSubmit() {
-    isLoading = true; // Start loading
+    isLoading = true;
     let _data: any;
 
-    [_data, err] = await post("/auth/signup", { username, password });
+    try {
+      [_data, err] = await post("/auth/signup", { username, password });
 
-    if (err) {
-      isLoading = false; // Stop loading on error
-      return;
+      if (err) {
+        isLoading = false;
+        return;
+      }
+
+      const [data] = await f("/sessions");
+      session.set(data);
+
+      isLoading = false;
+      goto("/dashboard/items");
+    } catch (error) {
+      isLoading = false;
     }
-
-    const [data] = await f("/sessions");
-    session.set(data);
-
-    isLoading = false; // Stop loading after success
-    goto("/dashboard/items");
   }
 </script>
 

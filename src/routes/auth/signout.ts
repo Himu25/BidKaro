@@ -1,9 +1,15 @@
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from "@sveltejs/kit";
 
 export const post: RequestHandler = async ({ request, locals }) => {
-	locals.session = null;
+  try {
+    locals.session = null;
 
-	return {
-		status: 200
-	};
+    return {
+      status: 200,
+    };
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
 };

@@ -24,17 +24,25 @@ const itemsByUser = async (userId, opts) => {
   };
 };
 const get = async ({ url, locals }) => {
-  const sort = {
-    page: parse(url.searchParams.get("page"), 0),
-    perPage: parse(url.searchParams.get("perPage"), 10),
-    sortBy: url.searchParams.get("sortBy") ?? "",
-    direction: url.searchParams.get("direction") ?? "",
-    tag: (url.searchParams.get("tag") ?? "").replace(/[^a-zA-Z0-9 -]/gi, "")
-  };
-  const { items, totalPages } = await itemsByUser(locals.session.userId, sort);
-  return {
-    body: { items, totalPages }
-  };
+  try {
+    const sort = {
+      page: parse(url.searchParams.get("page"), 0),
+      perPage: parse(url.searchParams.get("perPage"), 10),
+      sortBy: url.searchParams.get("sortBy") ?? "",
+      direction: url.searchParams.get("direction") ?? "",
+      tag: (url.searchParams.get("tag") ?? "").replace(/[^a-zA-Z0-9 -]/gi, "")
+    };
+    const { items, totalPages } = await itemsByUser(locals.session.userId, sort);
+    return {
+      body: { items, totalPages }
+    };
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return {
+      status: 500,
+      body: { message: "An error occurred while fetching the items." }
+    };
+  }
 };
 const parse = (val, def) => {
   const parsed = parseInt(val);

@@ -10,21 +10,26 @@
   let isLoading = false;
 
   async function onSubmit() {
-    isLoading = true; // Start loading
-    let _data: any;
+    try {
+      isLoading = true;
+      let _data: any;
 
-    [_data, err] = await post("/auth/signin", { username, password });
+      [_data, err] = await post("/auth/signin", { username, password });
 
-    if (err) {
-      isLoading = false; // Stop loading on error
-      return;
+      if (err) {
+        isLoading = false;
+        return;
+      }
+
+      const [data] = await f("/sessions");
+      session.set(data);
+
+      isLoading = false;
+      goto("/dashboard/items");
+    } catch (error) {
+      isLoading = false;
+      console.error("An error occurred during submission:", error);
     }
-
-    const [data] = await f("/sessions");
-    session.set(data);
-
-    isLoading = false; // Stop loading after success
-    goto("/dashboard/items");
   }
 </script>
 
@@ -67,7 +72,6 @@
 </div>
 
 <style>
-  /* Positioning the form */
   .login-container {
     display: flex;
     justify-content: center;

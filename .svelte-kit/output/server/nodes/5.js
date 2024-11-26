@@ -1,6 +1,6 @@
-import * as module from '../entries/pages/privacy.svelte.js';
+import * as module from '../entries/pages/items/index.svelte.js';
 
 export { module };
-export const entry = 'pages/privacy.svelte-31ed3e6c.js';
-export const js = ["pages/privacy.svelte-31ed3e6c.js","chunks/vendor-041ace6d.js"];
+export const entry = 'pages/items/index.svelte-99ee9120.js';
+export const js = ["pages/items/index.svelte-99ee9120.js","chunks/vendor-c278652d.js"];
 export const css = [];

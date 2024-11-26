@@ -179,9 +179,6 @@ function add_attribute(name, value, boolean) {
     return "";
   return ` ${name}${value === true && boolean_attributes.has(name) ? "" : `=${typeof value === "string" ? JSON.stringify(escape(value)) : `"${value}"`}`}`;
 }
-function add_classes(classes) {
-  return classes ? ` class="${classes}"` : "";
-}
 function style_object_to_string(style_object) {
   return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${style_object[key]};`).join(" ");
 }
@@ -189,4 +186,4 @@ function add_styles(style_object) {
   const styles = style_object_to_string(style_object);
   return styles ? ` style="${styles}"` : "";
 }
-export { add_attribute as a, add_styles as b, create_ssr_component as c, subscribe as d, escape as e, add_classes as f, getContext as g, safe_not_equal as h, assign as i, now as j, identity as k, loop as l, missing_component as m, noop as n, each as o, createEventDispatcher as p, setContext as s, validate_component as v };
+export { add_attribute as a, subscribe as b, create_ssr_component as c, add_styles as d, escape as e, safe_not_equal as f, getContext as g, assign as h, now as i, identity as j, each as k, loop as l, missing_component as m, noop as n, createEventDispatcher as o, setContext as s, validate_component as v };
