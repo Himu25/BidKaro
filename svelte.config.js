@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-vercel";
+import adapter from "@sveltejs/adapter-auto";
 import preprocess from "svelte-preprocess";
 import { resolve } from "path";
 
@@ -8,7 +8,7 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    floc: true, // Optional: Enables FLoC (Federated Learning of Cohorts) if required
+    // floc: true, // Optional: Enables FLoC (Federated Learning of Cohorts) if required
     adapter: adapter(), // Vercel adapter for deployment
     vite: {
       resolve: {
