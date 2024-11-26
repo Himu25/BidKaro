@@ -1,24 +1,24 @@
-import adapter from '@sveltejs/adapter-node';
-import preprocess from 'svelte-preprocess';
-import { resolve } from 'path';
+import adapter from "@sveltejs/adapter-vercel";
+import preprocess from "svelte-preprocess";
+import { resolve } from "path";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess(),
+  // Enable preprocessors
+  preprocess: preprocess(),
 
-	kit: {
-		floc: true,
-		adapter: adapter({ out: 'dist' }),
-		vite: {
-			resolve: {
-				alias: {
-					$services: resolve('./src/services')
-				}
-			}
-		}
-	}
+  kit: {
+    floc: true, // Optional: Enables FLoC (Federated Learning of Cohorts) if required
+    adapter: adapter(), // Vercel adapter for deployment
+    vite: {
+      resolve: {
+        alias: {
+          // Custom aliases for easier imports
+          $services: resolve("./src/services"),
+        },
+      },
+    },
+  },
 };
 
 export default config;
