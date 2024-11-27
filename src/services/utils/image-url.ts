@@ -1,4 +1,4 @@
-const apikey = "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";
+
 export const createImageUrl = async (name: String, description: String) => {
   try {
     const huggingFaceResponse = await fetch(
@@ -6,7 +6,7 @@ export const createImageUrl = async (name: String, description: String) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apikey}`,
+          Authorization: `Bearer ${process.env.HF_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ inputs: `${name}: ${description}` }),

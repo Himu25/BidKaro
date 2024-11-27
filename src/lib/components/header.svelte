@@ -69,6 +69,6 @@
 </nav>
 
 <!-- Content with Margin for Navbar -->
-<div class="mt-20">
+<div class="mt-24">
   <!-- Page Content Goes Here -->
 </div>

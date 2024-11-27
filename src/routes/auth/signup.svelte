@@ -38,7 +38,7 @@
     <h2 class="signup-title">Create a New Account</h2>
     <p class="signup-subtitle">
       Already have an account?
-      <a href="/auth/signin" class="signin-link">Sign in here</a>
+      <a href="/auth/signin" class="signin-link">Sign in</a>
     </p>
     <form on:submit|preventDefault={onSubmit} class="signup-form">
       <div class="input-group">
@@ -46,7 +46,7 @@
           bind:value={username}
           type="text"
           class="input-field"
-          placeholder="Enter your username"
+          placeholder="Username"
         />
       </div>
       <div class="input-group">
@@ -54,7 +54,7 @@
           bind:value={password}
           type="password"
           class="input-field"
-          placeholder="Enter your password"
+          placeholder="Password"
         />
       </div>
       <div class="action-group">

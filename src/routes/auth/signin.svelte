@@ -39,7 +39,7 @@
     <h2 class="login-title">Welcome Back!</h2>
     <p class="login-subtitle">
       Don't have an account?
-      <a href="/auth/signup" class="signup-link">Sign up here</a>
+      <a href="/auth/signup" class="signup-link">Sign up</a>
     </p>
     <form on:submit|preventDefault={onSubmit} class="login-form">
       <div class="input-group">
@@ -47,7 +47,7 @@
           bind:value={username}
           type="text"
           class="input-field"
-          placeholder="Enter your username"
+          placeholder="Username"
         />
       </div>
       <div class="input-group">
@@ -55,7 +55,7 @@
           bind:value={password}
           type="password"
           class="input-field"
-          placeholder="Enter your password"
+          placeholder="Password"
         />
       </div>
       <div class="action-group">

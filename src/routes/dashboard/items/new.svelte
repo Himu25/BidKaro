@@ -29,7 +29,7 @@
   }
 </script>
 
-<div class="flex justify-center p-8">
+<div class="flex justify-center bg-white">
   <form
     on:submit|preventDefault={onSubmit}
     class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
@@ -101,27 +101,6 @@
     >
       {#if loading}
         <span class="flex items-center justify-center">
-          <svg
-            class="animate-spin w-5 h-5 mr-3"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            />
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 1116 0A8 8 0 014 12z"
-            />
-          </svg>
           Submitting...
         </span>
       {:else}
